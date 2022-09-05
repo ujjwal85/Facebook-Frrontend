@@ -1,0 +1,16 @@
+.user-icon{
+width: 30px;
+height: 30px;
+margin-right: 1rem;
+clip-path: circle(50%);
+}
+.logo{
+    width: 30px;
+height: 30px;
+}
+.round{
+    height: 13px;
+    width:13px;
+    font-size: 10px;
+    clip-path: circle(50%);
+}

@@ -1,0 +1,5 @@
+.req-img{
+    height: 50px;
+    width: 50px;
+    clip-path: circle(50%);
+}

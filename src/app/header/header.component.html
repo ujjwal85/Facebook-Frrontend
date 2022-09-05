@@ -1,0 +1,37 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <img class="logo"
+            src="https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Facebook_f_logo_%282021%29.svg/1200px-Facebook_f_logo_%282021%29.svg.png"/>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+
+            </ul>
+            <div class="d-flex">
+                <a routerLink="/self" class="">
+                    <div *ngIf="user.picture!= undefined">
+                        <img class="user-icon" src={{user.picture}}/>
+                    </div>
+                </a>
+                <a routerLink="/" class="d-flex align-items-center" *ngIf="user.picture!= undefined">
+                    <i class="fa-solid fa-house-user me-3"></i>
+                </a>
+              
+                <a routerLink="/friend" class="text-decoration-none text-dark me-3 d-flex align-items-center position-relative" style="width: 20px;" *ngIf="user.picture!= undefined">
+                    <i class="fa-regular fa-user fa-1x"></i>
+                    <div class="bg-danger round d-flex justify-content-center align-items-center position-absolute top-0 end-0 text-white">{{updatedUser.friends.myFriendRequests.length}}</div>
+                </a>
+                <div (click)="logout()" class="d-flex align-items-center" *ngIf="user.picture!= undefined">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
