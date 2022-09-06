@@ -14,25 +14,27 @@
                         </div>
                         <div class="d-flex justify-content-around">
                             <div class="">
-                                <div class="text-center">{{ myposts.length}}</div> <div
+                                <div class="text-center">{{ myposts.length}}</div>
+                                <div
                                     class="text-center">Post</div>
                             </div>
                             <div>
-                                <div class="text-center">0</div> <div
+                                <div class="text-center">{{updateUser.friends.myFriends.length}}</div>
+                                <div
                                     class="text-center">Friends</div>
                             </div>
                         </div>
-                    </div>   
+                    </div>
                 </div>
 
 
 
                 <div class="card shadow-lg bg-body rounded mt-3">
                     <div class="">
-                       
-                      <img class="indian-flag" src="https://thumbs.dreamstime.com/b/national-flag-india-national-flag-india-thick-colored-smoke-black-isolated-background-114392945.jpg"/>
-                       
-                    </div>   
+
+                        <img class="indian-flag"
+                            src="https://thumbs.dreamstime.com/b/national-flag-india-national-flag-india-thick-colored-smoke-black-isolated-background-114392945.jpg"/>
+                    </div>
                 </div>
             </div>
             <div class="col-md-6 mt-3 middle-col">
@@ -41,61 +43,88 @@
                         <div class="d-flex justify-content-between">
                             <img class="icon me-2" src={{user.picture}}
                                 alt="">
-                            <input type="text" (change)="getCaption($event)" placeholder="write something..."
+                            <input type="text" (change)="getCaption($event)"
+                                placeholder="write something..."
                                 class="form-control"/>
                             <div>
-                                <input class="camera" type="file" (change)="upload($event)">
+                                <input class="camera" type="file"
+                                    (change)="upload($event)">
                             </div>
                         </div>
                         <div class="d-grid gap-2">
-                            <button class="btn btn-success mt-3"(click)="postUpload()"  type="button">Upload</button>
-           
+                            <button class="btn btn-success
+                                mt-3"(click)="postUpload()" type="button">Upload</button>
                         </div>
                     </div>
                 </div>
-    <div>
-        <div  *ngIf="myposts.length==0" class="text-center mt-4">You have no post please uplaod any post !!!</div>
-        <div *ngFor='let post of myposts.slice().reverse()'>
-            <div class="card mt-3">
+                <div>
+                    <div *ngIf="myposts.length==0" class="text-center mt-4">You
+                        have no post please uplaod any post !!!</div>
+                    <div *ngFor='let post of finalPosts'>
+                        <div class="card mt-3">
 
-                <div class="card-body">
-                    <div class="d-flex ">
-                        <img class="icon me-2" src={{user.picture}}
-                            alt="">
-                        <div>{{user.firstname+ " " +user.lastname }}</div>
+                            <div class="card-body">
+                                <div class="d-flex ">
+                                    <img class="icon me-2"
+                                        src={{post.posted_by.picture}}
+                                        alt="">
+                                    <div>{{post.posted_by.firstname+ " "
+                                        +post.posted_by.lastname }}</div>
 
-                    </div>
-                    <div class="ms-2 mt-2">{{post.caption}}</div>
-                    <img class="w-100 mt-3 fixed-card"
-                        src={{post.post_url}}
-                        alt="">
+                                </div>
+                                <div class="ms-2 mt-2">{{post.caption}}</div>
+                                <img class="w-100 mt-3 fixed-card"
+                                    src={{post.post_url}}
+                                    alt="">
 
-                    <div class="d-flex justify-content-between">
-                        <div class="d-flex">
-                            <div class="me-2">
-                                <i class="fa-solid fa-thumbs-up"></i>
-                                <span class="ms-1">0</span>
-                            </div>
+                                <div class="d-flex justify-content-between">
+                                    <div class="d-flex">
+                                        <div class="me-2">
+                                            <i class="fa-solid text-primary fa-thumbs-up "></i>
+                                            <span class="ms-1">{{post.like.length}}</span>
+                                        </div>
 
-                            <div>
-                                <i class="fa-solid fa-thumbs-down"></i>
-                                <span class="ms-1">0</span>
+                                        <div>
+                                            <i class="fa-solid text-danger fa-heart"></i>
+                                            <span class="ms-1">{{post.dislike.length}}</span>
+                                        </div>
+                                    </div>
+                                    <div>0comments</div>
+                                </div>
+                                <div class="d-flex justify-content-between
+                                    border-top
+                                    border-bottom pt-1 pb-2">
+                                    <div class="d-flex align-items-center p-2"
+                                        *ngIf="!post.like.includes(user._id)"
+                                        style="cursor: pointer;"
+                                        (click)="like(post)">
+                                        <i class="fa-regular fa-thumbs-up me-2"></i>Like</div>
+                                    <div class="d-flex align-items-center p-2 "
+                                        *ngIf="post.like.includes(user._id)"
+                                        style="cursor: pointer;"
+                                        (click)="like(post)">
+                                        <i class="fa-solid text-primary fa-thumbs-up me-2"></i>Unlike</div>
+
+
+                                    <div class="d-flex align-items-center "
+                                        *ngIf="!post.dislike.includes(user._id)"
+                                        style="cursor: pointer;"
+                                        (click)="love(post)"><i
+                                            class="fa-regular fa-heart me-2"></i>Love</div>
+                                    <div class="d-flex align-items-center"
+                                        *ngIf="post.dislike.includes(user._id)"
+                                        style="cursor: pointer;"
+                                        (click)="love(post)">
+                                        <div class="d-flex align-items-center"><i class="fa-solid text-danger fa-heart  me-2"></i></div>
+                                        Loved</div>
+                                    <div class="d-flex align-items-center ">
+                                        <div class="d-flex align-items-center"><i class="fa-regular fa-message me-2"></i></div>
+                                        <div>Comment</div></div>
+                                </div>
                             </div>
                         </div>
-                        <div>0comments</div>
-                    </div>
-                    <div class="d-flex justify-content-between border-top
-                        border-bottom pt-1 pb-2">
-                        <div class="d-flex  align-items-center">
-                            <i class="fa-regular fa-thumbs-up me-2"></i>Like</div>
-                        <div class="d-flex  align-items-center"><i class="fa-regular fa-thumbs-down me-2"></i>Dislike</div>
-                        <div class="d-flex  align-items-center "><i class="fa-regular fa-message me-2"></i><div>Comment</div></div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-           
 
 
 
@@ -104,9 +133,10 @@
 
 
 
-          
-        
-          
+
+
+
+
 
 
 
@@ -120,14 +150,14 @@
                 <div class="card shadow-lg bg-body rounded scroll">
                     <div class="card-body">
                         <div class="border-bottom ">My Contact</div>
-                        <div class="d-flex mt-3"  *ngFor='let user of friends'>
-                            <a routerLink="/user/{{user.id}}" class="d-flex text-decoration-none text-dark">
-                                
+                        <div class="d-flex mt-3" *ngFor='let user of friends'>
+                            <a routerLink="/user/{{user.id}}" class="d-flex
+                                text-decoration-none text-dark">
                                 <img class="icon me-2" src={{user.pic}}
-                                alt="">
-                            <div>{{user.firstname+ " " +user.lastname }}</div>
+                                    alt="">
+                                <div>{{user.firstname+ " " +user.lastname }}</div>
                             </a>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -136,12 +166,13 @@
                     <div class="card-body">
                         <div class="border-bottom ">Friends Suggestions</div>
                         <div class="d-flex mt-3" *ngFor='let users of allUsers'>
-                            <a class="d-flex text-dark text-decoration-none" routerLink="/user/{{users._id}}">
+                            <a class="d-flex text-dark text-decoration-none"
+                                routerLink="/user/{{users._id}}">
                                 <img class="icon me-2" src={{users.picture}}
-                                alt="">
-                            <div>{{users.firstname+ " " +users.lastname }}</div>
+                                    alt="">
+                                <div>{{users.firstname+ " " +users.lastname }}</div>
                             </a>
-                      
+
                         </div>
                     </div>
                 </div>

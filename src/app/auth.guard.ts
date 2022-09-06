@@ -16,14 +16,11 @@ export class AuthGuard implements CanActivate {
 
   constructor( private AppService: AppService,private router: Router){ }
   
-  fetchLoggedIn(){
-   
-  }
+ 
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    this.fetchLoggedIn();
-    console.log("outer from fetch");
+ 
     
      this.newObj = window.sessionStorage.getItem("myval");
      this.user=  JSON.parse(this.newObj)

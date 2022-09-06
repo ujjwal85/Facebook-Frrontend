@@ -20,4 +20,10 @@ export class HomeService {
   allUsers(){
     return this.http.get("http://localhost:8000/api/user/allUsers");
   }
+  getLike(data:any){
+    return this.http.post("http://localhost:8000/api/post/like",data);
+  }
+  getLove(data:any){
+    return this.http.post("http://localhost:8000/api/post/love",data);
+  }
 }
