@@ -17,6 +17,9 @@ export class HomeComponent implements OnInit {
   updateUser: any;
   friends: any;
   finalPosts: any;
+  openCommentBox= false
+  postId:any;
+  comment:any;
 
   constructor(
     private AppService: AppService,
@@ -146,5 +149,30 @@ export class HomeComponent implements OnInit {
     }).subscribe((res) => {
       this.fetchAllPost();
     });
+  }
+  openComment(postid:any){
+    this.postId=postid
+   
+    if(this.openCommentBox)
+    {
+      this.openCommentBox = false
+    }
+    else{
+      this.openCommentBox = true
+    }
+  }
+
+  getComment(e:any){
+
+    this.comment=e.target.value;
+    
+  }
+  sendComment(postid:any){
+    console.log(this.comment);
+    this.HomeService.getComment({postid:postid,userid:this.user._id,userpic:this.user.picture,userfirstname:this.user.firstname,userlastname:this.user.lastname,comment:this.comment}).subscribe((res)=>{
+      this.fetchAllPost();
+      
+    })
+    
   }
 }

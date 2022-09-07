@@ -50,3 +50,13 @@ clip-path: circle(50%);
    height: 50%;
    overflow-y: auto;
   }
+
+  div::-webkit-scrollbar {
+    width: 5px;
+    border-radius: 50px;
+  }
+  div::-webkit-scrollbar-thumb {
+    background-image: linear-gradient(to right, #434343 0%, black 100%)
+  }
+  
+  /* Handle on hover */

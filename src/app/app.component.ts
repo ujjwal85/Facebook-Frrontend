@@ -11,21 +11,9 @@ export class AppComponent implements OnInit {
   data = {};
   constructor( private AppService: AppService) {}
   ngOnInit(): void {
-   this.fetchUserApi();
-  }
-  fetchUserApi(){
-    // this.AppService.fetchUser().subscribe((res) => {
-    //   this.data = res;
-    //   sessionStorage.setItem("myval",JSON.stringify(this.data));
-    //   console.log(this.data);
-    //   return res;
-
-    // })
-
    
-    
-    
   }
+
   
   
 }
